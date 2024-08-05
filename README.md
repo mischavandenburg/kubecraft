@@ -1,2 +1,5 @@
-# kubecraft
-Community Resources for the KubeCraft Skool Community
+# KubeCraft
+
+Resources for the KubeCraft Skool Community
+
+<https://skool.com/kubecraft>
