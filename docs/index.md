@@ -10,4 +10,6 @@ It serves as a central place to gather information and links.
 
 ## Contributing
 
+Source is managed on [GitHub.](https://github.com/mischavandenburg/kubecraft)
+
 Please use [Conventional Commits](https://www.conventionalcommits.org/)
