@@ -4,7 +4,7 @@ Create an infrastructure for home-labs for a very simple web app.
 ## The objective is to gain practice on the following items:
 
 - Version Control Systems - Git, GitHub
-- CI/CD Tools - Jenkins X, Argo CD
+- CI/CD Tools - Azure DevOps Pipelines, Tekton and Gitlab CI
 - Containerization and Orchestration - Kubernetes
 - Container Registries - Docker Hub
 - Infrastructure as Code (IaC) - Helm, Terraform
