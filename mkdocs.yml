@@ -1,6 +1,7 @@
 site_name: KubeCraft
 repo_url: https://github.com/mischavandenburg/kubecraft
 repo_name: KubeCraft
+edit_uri: edit/main/docs
 
 theme:
   name: material
@@ -22,6 +23,10 @@ theme:
       toggle:
         icon: material/toggle-switch
         name: Switch to dark mode
+
+  features:
+    - content.action.edit
+    - content.action.view
 
 extra:
   social:
