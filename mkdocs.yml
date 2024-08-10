@@ -1,6 +1,14 @@
 site_name: KubeCraft
+repo_url: https://github.com/mischavandenburg/kubecraft
+repo_name: KubeCraft
+
 theme:
   name: material
+  logo: ./assets/img/kubecraft-logo-small.png
+  icon:
+    repo: material/github
+    edit: material/pencil
+    view: material/eye
   palette:
     # Palette toggle for dark mode
     - scheme: slate
@@ -15,3 +23,9 @@ theme:
         icon: material/toggle-switch
         name: Switch to dark mode
 
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/mischavandenburg/kubecraft
+    - icon: material/school
+      link: https://skool.com/kubecraft
