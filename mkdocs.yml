@@ -5,7 +5,7 @@ edit_uri: edit/main/docs
 
 theme:
   name: material
-  logo: ./assets/img/kubecraft-logo-small.png
+  logo: ./assets/img/kubecraft-logo-small.jpg
   icon:
     repo: material/github
     edit: material/pencil
