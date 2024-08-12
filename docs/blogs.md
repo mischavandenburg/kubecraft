@@ -22,6 +22,8 @@ Community member blogs & Recommended reading
 
 [Radek Padrta](https://www.radekpadrta.cz)
 
+[Rodrigo Miravalles](https://rmiravalles.github.io/)
+
 ## Recommended reading
 
 [ByteByteGo](https://blog.bytebytego.com/)
