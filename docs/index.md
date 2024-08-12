@@ -12,4 +12,6 @@ It serves as a central place to gather information and links.
 
 Source is managed on [GitHub.](https://github.com/mischavandenburg/kubecraft)
 
-Please use [Conventional Commits](https://www.conventionalcommits.org/)
+Please use [Conventional Commits.](https://www.conventionalcommits.org/)
+
+We intend to use [Diataxis](https://diataxis.fr/) as a framework for writing our documentation.
