@@ -24,6 +24,8 @@ Community member blogs & Recommended reading
 
 [Rodrigo Miravalles](https://rmiravalles.github.io/)
 
+[Alfonso Fortunato](https://alfonsofortunato.com)
+
 ## Recommended reading
 
 [ByteByteGo](https://blog.bytebytego.com/)
