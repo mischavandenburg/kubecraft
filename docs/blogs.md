@@ -26,6 +26,8 @@ Community member blogs & Recommended reading
 
 [Alfonso Fortunato](https://alfonsofortunato.com)
 
+[James Barrow](https://jamiebarrow.dev/)
+
 ## Recommended reading
 
 [ByteByteGo](https://blog.bytebytego.com/)
