@@ -26,6 +26,8 @@ Community member blogs & Recommended reading
 
 [Alfonso Fortunato](https://alfonsofortunato.com)
 
+[Jayanath Amaranayake](https://fewmorewords.com)
+
 ## Recommended reading
 
 [ByteByteGo](https://blog.bytebytego.com/)
