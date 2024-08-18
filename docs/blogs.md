@@ -28,8 +28,14 @@ Community member blogs & Recommended reading
 
 [James Barrow](https://jamiebarrow.dev/)
 
+[Pravin Kumar](https://pk0dev.github.io/blog)
+
 ## Recommended reading
 
 [ByteByteGo](https://blog.bytebytego.com/)
 
 [learnk8s](https://learnk8s.io/newsletter)
+
+[Julia Evans](https://jvns.ca/newsletter/)
+
+[Last Week in Kubernetes Development](https://lwkd.info/)
