@@ -26,6 +26,8 @@ Community member blogs & Recommended reading
 
 [Alfonso Fortunato](https://alfonsofortunato.com)
 
+[Jayanath Amaranayake](https://fewmorewords.com)
+
 [James Barrow](https://jamiebarrow.dev/)
 
 [Pravin Kumar](https://pk0dev.github.io/blog)
