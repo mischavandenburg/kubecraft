@@ -32,6 +32,8 @@ Community member blogs & Recommended reading
 
 [Pravin Kumar](https://pk0dev.github.io/blog)
 
+[Kamil Mrowka](https://kamilmrowka.com)
+
 ## Recommended reading
 
 [ByteByteGo](https://blog.bytebytego.com/)
