@@ -1,0 +1,4 @@
+terraform/terraform.tfstate.backup
+terraform/.terraform/providers/registry.terraform.io/azure/azapi/1.15.0/darwin_arm64/terraform-provider-azapi_v1.15.0
+terraform/.terraform/providers/registry.terraform.io/hashicorp/azurerm/3.117.0/darwin_arm64/terraform-provider-azurerm_v3.117.0_x5
+terraform/.terraform/providers/registry.terraform.io/hashicorp/random/3.6.3/darwin_arm64/terraform-provider-random_v3.6.3_x5
