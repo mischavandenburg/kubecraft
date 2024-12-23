@@ -1,10 +1,7 @@
-resource "random_pet" "rg_name" {
-  prefix = var.resource_group_name_prefix
-}
-
+# Create Resource Group
 resource "azurerm_resource_group" "rg" {
-  location = var.resource_group_location
-  name     = random_pet.rg_name.id
+  location = local.vm.location
+  name     = "vm-resource_group"
 }
 
 # Create virtual network
@@ -70,28 +67,19 @@ resource "azurerm_network_interface_security_group_association" "example" {
   network_security_group_id = azurerm_network_security_group.kc_terraform_nsg.id
 }
 
-# Generate random text for a unique storage account name
-resource "random_id" "random_id" {
-  keepers = {
-    # Generate a new ID only when a new resource group is defined
-    resource_group = azurerm_resource_group.rg.name
-  }
-
-  byte_length = 8
-}
 
 # Create virtual machine
 resource "azurerm_linux_virtual_machine" "kc_terraform_vm" {
-  name                  = "kcVM"
+  name                  = local.vm.name
   location              = azurerm_resource_group.rg.location
   resource_group_name   = azurerm_resource_group.rg.name
   network_interface_ids = [azurerm_network_interface.kc_terraform_nic.id]
-  size                  = "Standard_B1s"
+  size                  = local.vm.size
 
   os_disk {
     name                 = "kcOsDisk"
     caching              = "ReadWrite"
-    storage_account_type = "Premium_LRS"
+    storage_account_type = "Standard_LRS"
   }
 
   source_image_reference {
@@ -102,10 +90,10 @@ resource "azurerm_linux_virtual_machine" "kc_terraform_vm" {
   }
 
   computer_name  = "hostname"
-  admin_username = var.username
+  admin_username = local.vm.admin_username
 
   admin_ssh_key {
-    username   = var.username
+    username   = local.vm.admin_username
     public_key = azapi_resource_action.ssh_public_key_gen.output.publicKey
   }
 }
