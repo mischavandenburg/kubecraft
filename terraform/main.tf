@@ -1,7 +1,7 @@
 # Create Resource Group
 resource "azurerm_resource_group" "rg" {
   location = local.vm.location
-  name     = "vm-resource_group"
+  name     = "kcUbuntuResourceGroup"
 }
 
 # Create virtual network
@@ -62,7 +62,7 @@ resource "azurerm_network_interface" "kc_terraform_nic" {
 }
 
 # Connect the security group to the network interface
-resource "azurerm_network_interface_security_group_association" "example" {
+resource "azurerm_network_interface_security_group_association" "kc_terraform_associate" {
   network_interface_id      = azurerm_network_interface.kc_terraform_nic.id
   network_security_group_id = azurerm_network_security_group.kc_terraform_nsg.id
 }
@@ -89,7 +89,7 @@ resource "azurerm_linux_virtual_machine" "kc_terraform_vm" {
     version   = "latest"
   }
 
-  computer_name  = "hostname"
+  computer_name  = local.vm.hostname
   admin_username = local.vm.admin_username
 
   admin_ssh_key {
