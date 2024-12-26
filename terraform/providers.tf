@@ -28,6 +28,3 @@ provider "azurerm" {
   features {}
 }
 
-provider "azapi" {
-  alias = "azapi"
-}
