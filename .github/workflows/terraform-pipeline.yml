@@ -1,6 +1,7 @@
 name: Terraform pipeline
 
 on:
+  workflow_dispatch:
   push:
     paths:
       - 'terraform/**'
