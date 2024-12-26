@@ -16,6 +16,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     env:
+      ARM_ACCESS_KEY: ${{ secrets.ARM_ACCESS_KEY }}
       ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
       ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
