@@ -32,6 +32,7 @@ jobs:
         uses: hashicorp/setup-terraform@v3
 
       - name: Terraform format check
+        continue-on-error: false
         run: terraform fmt -check
 
       - name: Terraform init
