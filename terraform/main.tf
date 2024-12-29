@@ -4,6 +4,37 @@ resource "azurerm_resource_group" "rg" {
   name     = "kcUbuntuResourceGroup"
 }
 
+# Create randomized name for key vault, each key vault must have globally unique ID
+resource "random_string" "azurerm_key_vault_name" {
+  length  = 13
+  lower   = true
+  numeric = false
+  special = false
+  upper   = false
+}
+
+# Hold client identifying information for privilege & access control
+data "azurerm_client_config" "current" {}
+
+# Create key vault
+resource "azurerm_key_vault" "vault" {
+  name                       = "kcVault-${random_string.azurerm_key_vault_name.result}"
+  location                   = azurerm_resource_group.rg.location
+  resource_group_name        = azurerm_resource_group.rg.name
+  tenant_id                  = data.azurerm_client_config.current.tenant_id
+  sku_name                   = "standard"
+  soft_delete_retention_days = 7
+
+  access_policy {
+    tenant_id = data.azurerm_client_config.current.tenant_id
+    object_id = data.azurerm_client_config.current.object_id
+
+    key_permissions     = local.key_vault.key_permissions
+    secret_permissions  = local.key_vault.secret_permissions
+    storage_permissions = local.key_vault.storage_permissions
+  }
+}
+
 # Create virtual network
 resource "azurerm_virtual_network" "kc_terraform_network" {
   name                = "kcVnet"
