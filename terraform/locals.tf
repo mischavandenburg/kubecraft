@@ -7,13 +7,7 @@ locals {
     admin_username = "kubecraft"
   }
   key_vault = {
-    key_permissions = [
-      "Get"
-    ]
     secret_permissions = [
-      "Get"
-    ]
-    storage_permissions = [
       "Get"
     ]
   }

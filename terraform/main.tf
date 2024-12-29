@@ -27,11 +27,9 @@ resource "azurerm_key_vault" "vault" {
 
   access_policy {
     tenant_id = data.azurerm_client_config.current.tenant_id
-    object_id = data.azurerm_client_config.current.object_id
+    object_id = var.eso_identity_object_id
 
-    key_permissions     = local.key_vault.key_permissions
     secret_permissions  = local.key_vault.secret_permissions
-    storage_permissions = local.key_vault.storage_permissions
   }
 }
 
