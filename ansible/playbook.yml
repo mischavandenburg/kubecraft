@@ -1,0 +1,4 @@
+- name: Ansible playbook
+  hosts: localhost
+  roles:
+    - k3s
