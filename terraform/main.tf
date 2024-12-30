@@ -25,11 +25,21 @@ resource "azurerm_key_vault" "vault" {
   sku_name                   = "standard"
   soft_delete_retention_days = 7
 
+  # Policies for the external secrets operator
   access_policy {
     tenant_id = data.azurerm_client_config.current.tenant_id
-    object_id = var.eso_identity_object_id
+    object_id = data.azurerm_client_config.current.object_id # Remove this line and uncomment the next once ESO id is stored in local
+    #object_id = local.key_vault.eso_object_id
 
-    secret_permissions  = local.key_vault.secret_permissions
+    secret_permissions = local.key_vault.eso_secret_permissions
+  }
+
+  # Policies for the 'control panel' applying our Terraform configs
+  access_policy {
+    tenant_id = data.azurerm_client_config.current.tenant_id
+    object_id = data.azurerm_client_config.current.object_id
+
+    secret_permissions = local.key_vault.admin_secret_permissions
   }
 }
 
