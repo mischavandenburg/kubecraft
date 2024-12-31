@@ -60,12 +60,12 @@ jobs:
           # These will be injected into the below template, in addition to GitHub's standard
           # variables. You can perform string operations here as well.
           variables: >-
-            FMT_OUTCOME: ${{ steps.fmt.outcome }}
-            INIT_OUTCOME: ${{ steps.init.outcome }}
-            VALIDATE_OUTCOME: ${{ steps.validate.outcome }}
-            VALIDATE_OUTPUT: ${{ steps.validate.outputs.stdout }}
-            PLAN_OUTCOME: ${{ steps.plan.outcome }}
-            PLAN_OUTPUT: ${{ steps.plan.outputs.stdout }}
+            FMT_OUTCOME="${{ steps.fmt.outcome }}"
+            INIT_OUTCOME="${{ steps.init.outcome }}"
+            VALIDATE_OUTCOME="${{ steps.validate.outcome }}"
+            VALIDATE_OUTPUT="${{ steps.validate.outputs.stdout }}"
+            PLAN_OUTCOME="${{ steps.plan.outcome }}"
+            PLAN_OUTPUT="${{ steps.plan.outputs.stdout }}"
 
           # The following language="..." comment enables syntax highlighting in JetBrains IDEs
 
