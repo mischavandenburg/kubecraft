@@ -55,26 +55,36 @@ jobs:
         id: plan
         run: terraform plan -no-color -out terraform-plan
 
+      - uses: actions/github-script@v7
+        name: Generate step summary data
+        id: summary-values
+        env:
+          FMT_OUTCOME: ${{ steps.fmt.outcome }}
+          INIT_OUTCOME: ${{ steps.init.outcome }}
+          VALIDATE_OUTCOME: ${{ steps.validate.outcome }}
+          VALIDATE_OUTPUT: ${{ steps.validate.outputs.stdout }}
+          PLAN_OUTCOME: ${{ steps.plan.outcome }}
+          PLAN_OUTPUT: ${{ steps.plan.outputs.stdout }}
+        with:
+          script: |
+            return {
+              fmtOutcome: process.env.FMT_OUTCOME,
+              initOutcome: process.env.INIT_OUTCOME,
+              validateOutcome: process.env.VALIDATE_OUTCOME,
+              validateOutput: process.env.VALIDATE_OUTPUT,
+              planOutcome: process.env.PLAN_OUTCOME,
+              planOutput: process.env.PLAN_OUTPUT
+            };
+
+      - uses: austenstone/markdown-interpolation-action@main
+        with:
+          values: ${{ steps.summary-values.outputs.result }}
+          files-regex: step_summary_template.md
+          
+
       - name: Annotate step summary with plan results
         run: |
-          echo "#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`" >> $GITHUB_STEP_SUMMARY
-          echo "#### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`" >> $GITHUB_STEP_SUMMARY
-          echo "#### Terraform Validation 🤖\`${{ steps.validate.outcome }}\`" >> $GITHUB_STEP_SUMMARY
-          echo "<details><summary>Validation Output</summary>" >> $GITHUB_STEP_SUMMARY
-          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
-          echo "${{ steps.validate.outputs.stdout }}" >> $GITHUB_STEP_SUMMARY
-          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
-          echo "</details>" >> $GITHUB_STEP_SUMMARY
-
-          echo "#### Terraform Plan 📖\`${{ steps.plan.outcome }}\`" >> $GITHUB_STEP_SUMMARY
-
-          echo "<details><summary>Show Plan</summary>" >> $GITHUB_STEP_SUMMARY
-
-          echo "\`\`\`terraform" >> $GITHUB_STEP_SUMMARY
-          echo "${{ steps.plan.outputs.stdout }}" >> $GITHUB_STEP_SUMMARY
-          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
-
-          echo "</details>" >> $GITHUB_STEP_SUMMARY
+          cat ${{ github.workspace }}/.github/step_summary_template.md
 
           echo "*Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Working Directory: \`${{ env.tf_actions_working_dir }}\`, Workflow: \`${{ github.workflow }}\`*" >> $GITHUB_STEP_SUMMARY
 
