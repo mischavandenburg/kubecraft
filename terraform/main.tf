@@ -4,6 +4,45 @@ resource "azurerm_resource_group" "rg" {
   name     = "kcUbuntuResourceGroup"
 }
 
+# Create randomized name for key vault, each key vault must have globally unique ID
+resource "random_string" "azurerm_key_vault_name" {
+  length  = 13
+  lower   = true
+  numeric = false
+  special = false
+  upper   = false
+}
+
+# Hold client identifying information for privilege & access control
+data "azurerm_client_config" "current" {}
+
+# Create key vault
+resource "azurerm_key_vault" "vault" {
+  name                       = "kcVault-${random_string.azurerm_key_vault_name.result}"
+  location                   = azurerm_resource_group.rg.location
+  resource_group_name        = azurerm_resource_group.rg.name
+  tenant_id                  = data.azurerm_client_config.current.tenant_id
+  sku_name                   = "standard"
+  soft_delete_retention_days = 7
+
+  # Policies for the external secrets operator
+  access_policy {
+    tenant_id = data.azurerm_client_config.current.tenant_id
+    object_id = data.azurerm_client_config.current.object_id # Remove this line and uncomment the next once ESO id is stored in local
+    #object_id = local.key_vault.eso_object_id
+
+    secret_permissions = local.key_vault.eso_secret_permissions
+  }
+
+  # Policies for the 'control panel' applying our Terraform configs
+  access_policy {
+    tenant_id = data.azurerm_client_config.current.tenant_id
+    object_id = data.azurerm_client_config.current.object_id
+
+    secret_permissions = local.key_vault.admin_secret_permissions
+  }
+}
+
 # Create virtual network
 resource "azurerm_virtual_network" "kc_terraform_network" {
   name                = "kcVnet"

@@ -1,0 +1,31 @@
+- name: Check if K3s binary exists
+  ansible.builtin.stat:
+    path: /usr/local/bin/k3s
+  register: k3s_binary_check
+
+- name: Ensure K3s is installed
+  when: not k3s_binary_check.stat.exists
+  block:
+    - name: Download the K3s installation script
+      ansible.builtin.get_url:
+        url: https://get.k3s.io
+        dest: /tmp/install_k3s.sh
+        mode: "0755"
+
+    - name: Install K3s
+      ansible.builtin.shell: /tmp/install_k3s.sh
+      args:
+        executable: /bin/bash
+      become: true
+      changed_when: false
+
+    - name: Verify K3s installation
+      ansible.builtin.command: k3s --version
+      register: k3s_verify
+      changed_when: false
+      failed_when: k3s_verify.rc != 0
+
+    - name: Remove the K3s installation script
+      ansible.builtin.file:
+        path: /tmp/install_k3s.sh
+        state: absent
