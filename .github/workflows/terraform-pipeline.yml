@@ -40,16 +40,39 @@ jobs:
 
       - name: Terraform format check
         continue-on-error: true
+        id: fmt
         run: terraform fmt -check
 
       - name: Terraform init
+        id: init
         run: terraform init
 
       - name: Terraform validate
+        id: validate
         run: terraform validate -no-color
 
       - name: Terraform plan
+        id: plan
         run: terraform plan -no-color -out terraform-plan
+
+      - name: Annotate step summary with plan results
+        run: |
+          echo "#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "#### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "#### Terraform Validation 🤖\`${{ steps.validate.outcome }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "<details><summary>Validation Output</summary>" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`\n${{ steps.validate.outputs.stdout }}\n\`\`\`" >> $GITHUB_STEP_SUMMARY
+          echo "</details>" >> $GITHUB_STEP_SUMMARY
+
+          echo "#### Terraform Plan 📖\`${{ steps.plan.outcome }}\`" >> $GITHUB_STEP_SUMMARY
+
+          echo "<details><summary>Show Plan</summary>" >> $GITHUB_STEP_SUMMARY
+
+          echo "\`\`\`terraform\n ${{ steps.plan.outputs.stdout }}\n \`\`\`" >> $GITHUB_STEP_SUMMARY
+
+          echo "</details>" >> $GITHUB_STEP_SUMMARY
+
+          echo "*Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Working Directory: \`${{ env.tf_actions_working_dir }}\`, Workflow: \`${{ github.workflow }}\`*" >> $GITHUB_STEP_SUMMARY
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
