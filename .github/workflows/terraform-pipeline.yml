@@ -54,39 +54,51 @@ jobs:
       - name: Terraform plan
         id: plan
         run: terraform plan -no-color -out terraform-plan
-
-      - uses: actions/github-script@v7
-        name: Generate step summary data
-        id: summary-values
-        env:
-          FMT_OUTCOME: ${{ steps.fmt.outcome }}
-          INIT_OUTCOME: ${{ steps.init.outcome }}
-          VALIDATE_OUTCOME: ${{ steps.validate.outcome }}
-          VALIDATE_OUTPUT: ${{ steps.validate.outputs.stdout }}
-          PLAN_OUTCOME: ${{ steps.plan.outcome }}
-          PLAN_OUTPUT: ${{ steps.plan.outputs.stdout }}
-        with:
-          script: |
-            return {
-              fmtOutcome: process.env.FMT_OUTCOME,
-              initOutcome: process.env.INIT_OUTCOME,
-              validateOutcome: process.env.VALIDATE_OUTCOME,
-              validateOutput: process.env.VALIDATE_OUTPUT,
-              planOutcome: process.env.PLAN_OUTCOME,
-              planOutput: process.env.PLAN_OUTPUT
-            };
-
-      - uses: austenstone/markdown-interpolation-action@main
-        with:
-          values: ${{ steps.summary-values.outputs.result }}
-          files-regex: step_summary_template.md
           
+      - uses: WcAServices/markdown-template-action@v1
+        with:
+          # These will be injected into the below template, in addition to GitHub's standard
+          # variables. You can perform string operations here as well.
+          variables: >-
+            FMT_OUTCOME: ${{ steps.fmt.outcome }}
+            INIT_OUTCOME: ${{ steps.init.outcome }}
+            VALIDATE_OUTCOME: ${{ steps.validate.outcome }}
+            VALIDATE_OUTPUT: ${{ steps.validate.outputs.stdout }}
+            PLAN_OUTCOME: ${{ steps.plan.outcome }}
+            PLAN_OUTPUT: ${{ steps.plan.outputs.stdout }}
 
-      - name: Annotate step summary with plan results
-        run: |
-          cat ${{ github.workspace }}/.github/step_summary_template.md
+          # The following language="..." comment enables syntax highlighting in JetBrains IDEs
 
-          echo "*Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Working Directory: \`${{ env.tf_actions_working_dir }}\`, Workflow: \`${{ github.workflow }}\`*" >> $GITHUB_STEP_SUMMARY
+          # language="markdown"
+          template: |
+            #### Terraform Format and Style 🖌`$FMT_OUTCOME`
+
+            #### Terraform Initialization ⚙️`$INIT_OUTCOME`
+
+            #### Terraform Validation 🤖`$VALIDATE_OUTCOME`
+
+            <details>
+            <summary>Validation Output</summary>
+
+            ```
+            $VALIDATE_OUTPUT
+            ```
+
+            </details>
+
+            #### Terraform Plan 📖`$PLAN_OUTCOME`
+
+            <details>
+
+            <summary>Show Plan</summary>
+
+            ```terraform
+            $PLAN_OUTPUT
+            ```
+            
+            </details>
+
+            *Pusher: @$GITHUB_ACTOR, Action: `$GITHUB_EVENT_NAME`, Working Directory: `$tf_actions_working_dir`, Workflow: `$GITHUB_WORKFLOW`*
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
