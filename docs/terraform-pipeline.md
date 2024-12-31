@@ -22,6 +22,8 @@ Follow these documents in order for a complete walk-through to setup a service p
 - [Create a service principal](https://learn.microsoft.com/en-us/entra/identity-platform/howto-create-service-principal-portal)
 - [Configure a federated identity](https://learn.microsoft.com/en-us/entra/workload-id/workload-identity-federation-create-trust?pivots=identity-wif-apps-methods-azp#github-actions)
 
+**Note:** You will need to create credentials valid for a `push` to the `main` branch, and for the `staging` environment.
+
 ### Remote backend configuration
 
 For the remote backend configuration, we will need to configure a resource group, storage account, and container on Azure Blob Storage. You can use the following script to provision these resources:
@@ -49,7 +51,11 @@ Now, take note of your `$STORAGE_ACCOUNT_NAME`. You will need to specify its val
 
 Also, copy your `ACCOUNT_KEY` and store it on Github Actions secrets under a secret named `ARM_ACCESS_KEY`.
 
+### Github environment
+
+The Terraform pipeline leverages environment protection rules to enable manual approvals for the `terraform apply` command. In order to use this workflow, you will need to create a `staging` environment from your repository settings page (on your own fork). You don't need to add any environment protection rules if you don't want to, but if you do, simply check the "require approvals" checkbox and add yourself as a required reviewer.
+
 ### Push and Test
 
-Once you've created the secrets on Github Actions for OIDC authentication and adjusted the backend provider configuration to your own Azure storage account, commit your changes and push the code to your `main` branch. This will trigger the pipeline automatically. Alternatively, you can navigate to `https://github.com/your-username/kubecraft/actions`, select the Terraform pipeline workflow on the left hand side menu, and use the "Run workflow" button to manually trigger the workflow execution.
+Once you've created the secrets on Github Actions for OIDC authentication, adjusted the backend provider configuration to your own Azure storage account, and created the `staging` environment on your repository, commit your changes and push the code to your `main` branch. This will trigger the pipeline automatically. Alternatively, you can navigate to `https://github.com/your-username/kubecraft/actions`, select the Terraform pipeline workflow on the left hand side menu, and use the "Run workflow" button to manually trigger the workflow execution.
 
