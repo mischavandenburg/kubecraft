@@ -98,7 +98,7 @@ jobs:
             
             </details>
 
-            *Pusher: @$GITHUB_ACTOR, Action: `$GITHUB_EVENT_NAME`, Working Directory: `$tf_actions_working_dir`, Workflow: `$GITHUB_WORKFLOW`*
+            *Actor: @$GITHUB_ACTOR, Action: `$GITHUB_EVENT_NAME`*
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
