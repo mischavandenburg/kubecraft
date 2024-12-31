@@ -60,6 +60,7 @@ jobs:
   apply:
     runs-on: ubuntu-latest
     environment: staging
+    needs: plan
     defaults:
       run:
         working-directory: ./terraform
