@@ -69,9 +69,6 @@ jobs:
             PLAN_OUTCOME="${{ steps.plan.outcome }}"
             PLAN_OUTPUT="${{ steps.plan.outputs.stdout }}"
 
-          # The following language="..." comment enables syntax highlighting in JetBrains IDEs
-
-          # language="markdown"
           template: |
             #### Terraform Format and Style 🖌`$FMT_OUTCOME`
 
@@ -139,11 +136,6 @@ jobs:
           name: plan
           path: ./terraform
 
-      - name: Inspect plan file
-        run: |
-          ls -algh .
-          ls -algh terraform-plan
-
-      # - name: Terraform apply
-      #   run: terraform apply -auto-approve terraform-plan
+      - name: Terraform apply
+        run: terraform apply -auto-approve terraform-plan
  
