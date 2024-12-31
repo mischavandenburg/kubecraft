@@ -24,6 +24,7 @@ jobs:
     defaults:
       run:
         working-directory: ./terraform
+    name: Plan
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -56,6 +57,7 @@ jobs:
         run: terraform plan -no-color -out terraform-plan
           
       - uses: WcAServices/markdown-template-action@v1
+        continue-on-error: true
         with:
           # These will be injected into the below template, in addition to GitHub's standard
           # variables. You can perform string operations here as well.
@@ -110,6 +112,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: staging
     needs: plan
+    name: Apply
     defaults:
       run:
         working-directory: ./terraform
