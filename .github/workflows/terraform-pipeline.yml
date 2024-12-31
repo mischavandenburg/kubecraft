@@ -54,14 +54,20 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: workspace
-          path: ./
+          name: plan
+          path: ./terraform
 
   apply:
     runs-on: ubuntu-latest
     environment: staging
     needs: plan
+    defaults:
+      run:
+        working-directory: ./terraform
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Azure login
         uses: azure/login@v2
         with:
@@ -72,10 +78,14 @@ jobs:
       - name: Setup terraform
         uses: hashicorp/setup-terraform@v3
 
+      - name: Terraform init
+        run: terraform init
+
       - name: Download artifact
         uses: actions/download-artifact@v4
         with:
-          name: workspace
+          name: plan
+          path: ./terraform
 
       - name: Inspect plan file
         run: |
