@@ -283,6 +283,10 @@
   background-color: var(--blue) !important;
 }
 
+.md-search-result__meta {
+  color: var(--bg-light) !important;
+}
+
 /* ! Others */
 
 .hero-container {
