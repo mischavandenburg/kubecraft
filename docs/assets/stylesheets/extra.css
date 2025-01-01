@@ -50,18 +50,18 @@
   --md-code-bg-color: var(--bg-lighter);
   --md-code-hl-color: var(--blue);
   --md-code-hl-color--light: var(--blue-transparent);
-  --md-code-hl-number-color: #ee99a0;
-  --md-code-hl-special-color: #ed8796;
-  --md-code-hl-function-color: #c6a0f6;
-  --md-code-hl-constant-color: #f5bde6;
-  --md-code-hl-keyword-color: #c3e0e5;
-  --md-code-hl-string-color: #a6e3a1;
-  --md-code-hl-name-color: #cad3f5;
-  --md-code-hl-operator-color: #b8c0e0;
-  --md-code-hl-punctuation-color: #b8c0e0;
-  --md-code-hl-comment-color: #939ab7;
-  --md-code-hl-generic-color: #939ab7;
-  --md-code-hl-variable-color: #939ab7;
+  --md-code-hl-number-color: var(--orange);
+  --md-code-hl-special-color: var(--red);
+  --md-code-hl-function-color: var(--purple);
+  --md-code-hl-constant-color: var(--blue);
+  --md-code-hl-keyword-color: var(--teal);
+  --md-code-hl-string-color: var(--green);
+  --md-code-hl-name-color: var(--fg-light);
+  --md-code-hl-operator-color: var(--fg-lighter);
+  --md-code-hl-punctuation-color: var(--fg-lighter);
+  --md-code-hl-comment-color: var(--blue-transparent);
+  --md-code-hl-generic-color: var(--fg-lighter);
+  --md-code-hl-variable-color: var(--fg-lighter);
   --md-typeset-color: var(--fg);
   --md-typeset-a-color: var(--blue);
   --md-typeset-del-color: var(--red-transparent);
@@ -149,7 +149,7 @@
   --md-code-hl-name-color: var(--fg-light);
   --md-code-hl-operator-color: var(--fg-lighter);
   --md-code-hl-punctuation-color: var(--fg-lighter);
-  --md-code-hl-comment-color: var(--fg-lighter);
+  --md-code-hl-comment-color: var(--blue-transparent);
   --md-code-hl-generic-color: var(--fg-lighter);
   --md-code-hl-variable-color: var(--fg-lighter);
   --md-typeset-color: var(--fg);
@@ -239,7 +239,7 @@
   --md-code-hl-name-color: var(--fg-light);
   --md-code-hl-operator-color: var(--fg-lighter);
   --md-code-hl-punctuation-color: var(--fg-lighter);
-  --md-code-hl-comment-color: var(--fg-lighter);
+  --md-code-hl-comment-color: var(--blue-transparent);
   --md-code-hl-generic-color: var(--fg-lighter);
   --md-code-hl-variable-color: var(--fg-lighter);
   --md-typeset-color: var(--fg);
@@ -285,6 +285,10 @@
 
 .md-search-result__meta {
   color: var(--bg-light) !important;
+}
+
+.md-tag {
+  background-color: var(--bg-lightest) !important;
 }
 
 /* ! Others */
