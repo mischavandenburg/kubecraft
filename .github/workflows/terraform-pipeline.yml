@@ -1,0 +1,141 @@
+name: Terraform pipeline
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'terraform/**'
+    branches:
+      - main
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  ARM_ACCESS_KEY: ${{ secrets.ARM_ACCESS_KEY }}
+  ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+  ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+  ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./terraform
+    name: Plan
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Azure login
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Setup terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform format check
+        continue-on-error: true
+        id: fmt
+        run: terraform fmt -check
+
+      - name: Terraform init
+        id: init
+        run: terraform init
+
+      - name: Terraform validate
+        id: validate
+        run: terraform validate -no-color
+
+      - name: Terraform plan
+        id: plan
+        run: terraform plan -no-color -out terraform-plan
+          
+      - uses: WcAServices/markdown-template-action@v1
+        continue-on-error: true
+        with:
+          # These will be injected into the below template, in addition to GitHub's standard
+          # variables. You can perform string operations here as well.
+          variables: >-
+            FMT_OUTCOME="${{ steps.fmt.outcome }}"
+            INIT_OUTCOME="${{ steps.init.outcome }}"
+            VALIDATE_OUTCOME="${{ steps.validate.outcome }}"
+            VALIDATE_OUTPUT="${{ steps.validate.outputs.stdout }}"
+            PLAN_OUTCOME="${{ steps.plan.outcome }}"
+            PLAN_OUTPUT="${{ steps.plan.outputs.stdout }}"
+
+          template: |
+            #### Terraform Format and Style 🖌`$FMT_OUTCOME`
+
+            #### Terraform Initialization ⚙️`$INIT_OUTCOME`
+
+            #### Terraform Validation 🤖`$VALIDATE_OUTCOME`
+
+            <details>
+            <summary>Validation Output</summary>
+
+            ```
+            $VALIDATE_OUTPUT
+            ```
+
+            </details>
+
+            #### Terraform Plan 📖`$PLAN_OUTCOME`
+
+            <details>
+
+            <summary>Show Plan</summary>
+
+            ```terraform
+            $PLAN_OUTPUT
+            ```
+            
+            </details>
+
+            *Actor: @$GITHUB_ACTOR, Action: `$GITHUB_EVENT_NAME`*
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: plan
+          path: ./terraform
+
+  apply:
+    runs-on: ubuntu-latest
+    environment: staging
+    needs: plan
+    name: Apply
+    defaults:
+      run:
+        working-directory: ./terraform
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Azure login
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Setup terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform init
+        run: terraform init
+
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: plan
+          path: ./terraform
+
+      - name: Terraform apply
+        run: terraform apply -auto-approve terraform-plan
+ 

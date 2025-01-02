@@ -15,8 +15,21 @@ terraform {
       version = "~>3.0"
     }
   }
+
+  backend "azurerm" {
+    resource_group_name = "tfstate"
+    # TODO: use your own storage_account_name
+    storage_account_name = "tfstate1028"
+    container_name       = "tfstate"
+    key                  = "terraform.tfstate"
+  }
 }
 
 provider "azurerm" {
   features {}
 }
+
+provider "azapi" {
+  use_oidc = true
+}
+
