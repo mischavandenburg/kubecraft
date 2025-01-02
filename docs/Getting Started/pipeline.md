@@ -1,7 +1,8 @@
 # Pipeline Mock-up
+
 Create an infrastructure for home-labs for a very simple web app.
 
-## The objective is to gain practice on the following items:
+## The objective is to gain practice on the following items
 
 - Version Control Systems - Git, GitHub
 - CI/CD Tools - Azure DevOps Pipelines, Tekton and Gitlab CI
@@ -12,7 +13,8 @@ Create an infrastructure for home-labs for a very simple web app.
 - Service Mesh - Istio
 - GitOps Tools - Flux, Argo CD
 
-## Guiding principles:
+## Guiding principles
+
 1. The above should not exclude porting to cloud providers for the more advanced professionals.
 2. Each part should be as decoupled as possible to allow porting and maintenance but most importantly modularity so that different implementations could allow focussing on specific aspects. An initial version could be on Proxmox but then people could contribute to running it on say VirtualBox or leave this layer entirely and run on Docker Desktop.
 3. In order to manage complexity, we should aim to pin down the baseline project elements listed above should leaving variations individual endeavours or side-projects.

@@ -3,3 +3,9 @@
 *.tfstate
 *.tfstate.*
 terraform/terraform.tfstate
+
+# Python
+.venv/
+
+# Editor
+.vscode/

@@ -2,31 +2,84 @@ site_name: KubeCraft
 repo_url: https://github.com/mischavandenburg/kubecraft
 repo_name: KubeCraft
 edit_uri: edit/main/docs
+site_url: https://docs.kubecraft.community/
 
 theme:
   name: material
-  logo: ./assets/img/kubecraft-logo-small.jpg
+  logo: /assets/images/kubecraft.png
+  favicon: /assets/images/kubecraft.png
   icon:
     repo: material/github
     edit: material/pencil
     view: material/eye
+    annotation: material/plus-circle
+  font:
+    text: Inter
+    code: Fira Code
+  custom_dir: docs/assets/pages
   palette:
-    # Palette toggle for dark mode
-    - scheme: slate
-      primary: deep purple
+    - scheme: Dark_Blue # Palette toggle for dark mode
+      primary: custom
+      accent: custom
       toggle:
         icon: material/toggle-switch-off-outline
-        name: Switch to light mode
-    # Palette toggle for light mode
-    - scheme: default
-      primary: deep purple
+        name: Prepare for Flashbang!
+    - scheme: Light_Blue # Palette toggle for light mode
+      primary: custom
+      accent: custom
       toggle:
         icon: material/toggle-switch
-        name: Switch to dark mode
+        name: Join the dark side. We have cookies.
 
   features:
     - content.action.edit
     - content.action.view
+    - search.suggest
+    - search.share
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.sections
+    - navigation.path
+    - navigation.prune
+    - navigation.indexes
+    - navigation.top
+    - content.code.copy
+
+plugins:
+  - search
+  - blog:
+      blog_dir: blog
+      post_dir: blog/posts
+  - glightbox
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - md_in_html
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.caret
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - toc:
+      permalink: true
 
 extra:
   social:
@@ -34,3 +87,6 @@ extra:
       link: https://github.com/mischavandenburg/kubecraft
     - icon: material/school
       link: https://skool.com/kubecraft
+
+extra_css:
+  - assets/stylesheets/extra.css

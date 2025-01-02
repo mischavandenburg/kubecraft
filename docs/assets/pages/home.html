@@ -1,0 +1,33 @@
+{% extends "main.html" %} {% block styles %} {{ super() }}
+<style>
+    .md-content__inner {
+        margin: 0;
+        margin-top: 0;
+        padding: 0;
+    }
+
+    .md-grid {
+        margin-bottom: 0;
+        padding: 0;
+    }
+</style>
+{% endblock %} {% block content %}
+
+<div class="hero-container">
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Welcome to KubeCraft</h1>
+            <p>
+                Fast-track becoming a (better) DevOps Engineer. Featuring Mentorship
+                Calls, Courses and a Premium Community. Perfect for any skill level!
+            </p>
+            <div class="cta-buttons">
+                <a href="https://skool.com/kubecraft" class="md-button md-button--primary" target="_blank">Join
+                    KubeCraft</a>
+                <a href="/Getting%20Started/" class="md-button">Getting Started</a>
+            </div>
+        </div>
+    </section>
+</div>
+
+{{ page.content }} {% endblock %}

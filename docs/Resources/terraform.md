@@ -1,8 +1,8 @@
-# Terraform
+---
+title: Terraform
+---
 
-## Resources for Learning Terraform 
-
-### Free
+## Free
 
 [Hashicorp Learn: Aws](https://developer.hashicorp.com/terraform/tutorials/aws-get-started) - Hashicorp's official getting started tutorial for AWS
 
@@ -14,6 +14,6 @@
 
 [Awesome-TF](https://github.com/shuaibiyy/awesome-tf) - A curated list of Terraform resources
 
-### Paid
+## Paid
 
 [More than Certified: HashiCorp Terraform](https://courses.morethancertified.com/p/mtc-terraform) - a great course that also covers some fun projects with Docker, k3s, Node-Red IOT, and CICD deployments.
