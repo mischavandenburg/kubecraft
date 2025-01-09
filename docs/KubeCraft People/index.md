@@ -29,6 +29,8 @@ We are incredibly proud of our dedicated community members who contribute their 
 
 [Mischa van den Burg](https://mischavandenburg.substack.com/) [:simple-github:](https://github.com/mischavandenburg/) [:fontawesome-brands-linkedin:](https://www.linkedin.com/in/mischavandenburg) [:simple-youtube:](https://www.youtube.com/@mischavandenburg)
 
+[Pedro Chang](https://www.pedrotchang.dev/) [:simple-github:](https://github.com/PedroTChang) [:fontawesome-brands-linkedin:](https://www.linkedin.com/in/pedrotchang) [:simple-youtube:](https://www.youtube.com/@pedrotchang)
+
 [Rajesh Kumar Das](https://hyperoot.dev/) [:simple-github:](https://github.com/HYP3R00T) [:fontawesome-brands-linkedin:](https://www.linkedin.com/in/rajesh-kumar-das/) [:simple-youtube:](https://www.youtube.com/@hyperoot)
 
 [Rodrigo Miravalles](https://rmiravalles.github.io/) [:simple-github:](https://github.com/rmiravalles) [:fontawesome-brands-linkedin:](https://www.linkedin.com/in/rodrigomiravalles/)
