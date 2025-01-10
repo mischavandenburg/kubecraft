@@ -24,6 +24,11 @@ Follow these documents in order for a complete walk-through to setup a service p
 
 **Note:** You will need to create credentials valid for a `push` to the `main` branch, and for the `staging` environment.
 
+- Specify an Entity type of Branch and a GitHub branch name of "main".
+- Specify an Entity type of Environment and a GitHub environment name of "staging" (this must correspond with the environment name you set in your repo fork)
+
+When the service principal is created, assign it the "Contributor" role on the subscription that you will be deploying to.
+
 ### Remote backend configuration
 
 For the remote backend configuration, we will need to configure a resource group, storage account, and container on Azure Blob Storage. You can use the following script to provision these resources:
@@ -58,4 +63,3 @@ The Terraform pipeline leverages environment protection rules to enable manual a
 ### Push and Test
 
 Once you've created the secrets on Github Actions for OIDC authentication, adjusted the backend provider configuration to your own Azure storage account, and created the `staging` environment on your repository, commit your changes and push the code to your `main` branch. This will trigger the pipeline automatically. Alternatively, you can navigate to `https://github.com/your-username/kubecraft/actions`, select the Terraform pipeline workflow on the left hand side menu, and use the "Run workflow" button to manually trigger the workflow execution.
-
