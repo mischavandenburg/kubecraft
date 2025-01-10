@@ -135,4 +135,12 @@ resource "azurerm_linux_virtual_machine" "kc_terraform_vm" {
     username   = local.vm.admin_username
     public_key = azapi_resource_action.ssh_public_key_gen.output.publicKey
   }
+
+
+  admin_ssh_key {
+    username   = local.vm.admin_username
+    public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC7cKlVWUh8/PPsU4pSKjXucEEVDp99JG+EMUy7vf1CTCQoJ54OJ0ShFFPv5ddyDuZ4wVN04UlVXIna25TgDu3F1VpedzT+W7uqB+Evyz+lqtj/m57eLewjzB1w670OgNNE3XjgBG3FRqysyIOq+nG8X2LITVJVprrx7NoOwOZSGu92+8UQ4f0IyMcvvpFgzp+86zaHQ220fasEn8GZ/by2o94BV0Frk98RvnI9/woEQg/zavkQqERqSWl3VLzXNe2kJlcGG613fGZrbtsH2i3UV4yMOxFa1MInzlh4io6FmI9ic3YLJ8L+9BWxN9IdA0mE5N21SpWG9elWp/MmN8vzQvdqKJmKnjZfeLDpNXB9PTKsJ1hkch2ssb/OrfJ5dTIJNQZixL+f1ZumDzfAQXBMaMj8h+oCuiwfyVY9br8JSJeEM7AWVNavmRWdmv/o8XccGn0d2xqEwzBT4GOM/iKR45tI1xMckbfwS8R04OfxVWPB3qsffUwXN4i+wUVox5K1+qSjTcuXiLgdaXDwNaOshzi/iEK9y34StxJ8OxUL8eEuuU2xC49hfP7qqPqWefxqEVBzalpzG5GcokWFF0lmDX5WXj6dF1hKV31p1MglPyVi00RESWbHTAIWc/x5pPUX02tZ9FeFRXSTAAEce0E1WiSu+tbI0+ftUesjizhJIQ== cardno:23_421_713"
+  }
+
+
 }
