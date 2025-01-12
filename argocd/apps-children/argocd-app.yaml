@@ -1,0 +1,41 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd-app
+  namespace: argocd
+spec:
+  project: default
+  destination:
+    namespace: argocd
+    server: https://kubernetes.default.svc
+  source:
+    repoURL: https://argoproj.github.io/argo-helm
+    targetRevision: 7.7.15
+    chart: argo-cd
+    helm:
+      releaseName: argo-cd
+      values: |
+        redis-ha:
+          enabled: true
+
+        controller:
+          replicas: 1
+
+        server:
+          autoscaling:
+            enabled: true
+            minReplicas: 1
+
+        repoServer:
+          autoscaling:
+            enabled: true
+            minReplicas: 1
+
+        applicationSet:
+          replicas: 1
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true
