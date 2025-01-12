@@ -95,6 +95,10 @@ spec:
 ```
 
 (iii) values.yaml (for manual step)
+
+Quote from [artifacthub](https://artifacthub.io/packages/helm/argo/argo-cd#high-availability):
+> Warning: You need at least 3 worker nodes as the HA mode of redis enforces Pods to run on separate nodes.
+
 ```
 redis-ha:
   enabled: true
