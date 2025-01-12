@@ -1,6 +1,6 @@
 ### Introduction:
 
-In this guide, we will go through the installation of argocd manually first and then make the argocd self-manage itself declaratively through creation of argocd 'application'.  For manual installation, we will make use of the `helm` and for self-managing through the argocd 'application', we will still make use of the argocd helm chart but we will follow app of apps pattern. So if there is any change (argocd version update) to the `argocd-app.yaml` file shown below, then root-app will make sure that the argocd-app is marked as out-of-sync.  
+In this guide, we will go through the installation of argocd manually first and then make the argocd self-manage itself declaratively through creation of argocd 'application'.  For manual installation, we will make use of the [helm](https://artifacthub.io/packages/helm/argo/argo-cd) and for self-managing through the argocd 'application', we will still make use of the argocd helm chart but we will follow app of apps pattern. So if there is any change (argocd version update) to the `argocd-app.yaml` file shown below, then root-app will make sure that the argocd-app is marked as out-of-sync.  
 
 ---
 ### Directory structure:
@@ -137,7 +137,6 @@ create argocd manually using the below command:
 `helm install argo-cd argo/argo-cd --version 7.7.15 -n argocd --create-namespace -f values/values.yaml`
 
 Output:
-``
 ```
 $ helm install argo-cd argo/argo-cd --version 7.7.15 -n argocd --create-namespace -f values/values.yaml
 NAME: argo-cd
