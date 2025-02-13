@@ -15,7 +15,7 @@ We are incredibly proud of our dedicated community members who contribute their 
 
 [Alfonso Fortunato](https://alfonsofortunato.com) [:simple-github:](https://github.com/MovieMaker93) [:fontawesome-brands-linkedin:](https://www.linkedin.com/in/alfonso-fortunato-a37056b9/)
 
-[James Barrow](https://jamiebarrow.dev/)
+[James Barrow](https://jamiebarrow.dev/) [:simple-github:](https://github.com/jamiebarrow) [:fontawesome-brands-linkedin:](https://www.linkedin.com/in/jamesbarrow1984)
 
 [Jan Charamza](https://charamza.substack.com/)
 
