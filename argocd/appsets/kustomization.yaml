@@ -1,0 +1,10 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  # - qa-appset.yaml
+  # - staging-appset.yaml
+  # - production.yaml
+  - qa-apps-appset.yaml
+  - qa-cnpg-appset.yaml
+  - qa-databases-appset.yaml

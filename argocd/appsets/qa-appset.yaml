@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: my-qa-appset
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+    - git:
+        repoURL: https://github.com/Tim275/kubecraft.git
+        revision: HEAD
+        directories:
+          - path: argocd/apps/*/envs/qa
+          - path: argocd/infrastructure/cnpg/envs/qa
+          - path: argocd/infrastructure/databases/*/envs/qa
+  template:
+    metadata:
+      name: '{{ if eq (index .path.segments 1) "infrastructure" }}{{ if eq (index .path.segments 2) "cnpg" }}cnpg-qa{{ else if eq (index .path.segments 2) "databases" }}{{ index .path.segments 3 }}-qa{{ end }}{{ else }}{{ index .path.segments 2 }}-qa{{ end }}'
+      annotations:
+        argocd.argoproj.io/sync-wave: '{{ if eq (index .path.segments 1) "infrastructure" }}{{ if eq (index .path.segments 2) "cnpg" }}-5{{ else if eq (index .path.segments 2) "databases" }}0{{ end }}{{ else }}5{{ end }}'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/Tim275/kubecraft.git
+        targetRevision: HEAD
+        path: "{{ .path.path }}"
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{ if eq (index .path.segments 1) "infrastructure" }}{{ if eq (index .path.segments 2) "cnpg" }}cnpg-system{{ else if eq (index .path.segments 2) "databases" }}default{{ end }}{{ else }}{{ index .path.segments 2 }}-qa{{ end }}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+          - ServerSideApply=true

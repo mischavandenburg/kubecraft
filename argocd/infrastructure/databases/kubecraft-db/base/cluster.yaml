@@ -1,0 +1,21 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: kubecraft-database-cluster
+  namespace: default # Explicitly setting namespace
+spec:
+  description: Postgres database cluster for kubecraft
+  imageName: ghcr.io/cloudnative-pg/postgresql:16.6-30-bookworm
+  instances: 3
+
+  inheritedMetadata:
+    labels:
+      app: kubecraft-database
+
+  bootstrap:
+    initdb:
+      database: app
+      owner: app
+
+  storage:
+    size: 1Gi
