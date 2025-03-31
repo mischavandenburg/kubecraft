@@ -9,3 +9,7 @@ terraform/terraform.tfstate
 
 # Editor
 .vscode/
+
+# Bak
+*.bak
+*~
