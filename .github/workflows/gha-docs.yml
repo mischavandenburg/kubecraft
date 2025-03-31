@@ -3,7 +3,7 @@ name: GHA Docs
 on:
   push:
     branches:
-      - main
+      - test
 
 jobs:
   update-changelog:
