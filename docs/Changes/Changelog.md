@@ -1,0 +1,5 @@
+---
+title: Changes
+hide:
+  - toc
+---
