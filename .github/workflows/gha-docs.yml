@@ -18,6 +18,6 @@ jobs:
     - name: Get docs commits
       id: docs_commits
       run: |
-        logs=$(git log origin/main..HEAD --format='- %s (%an, %ad)' --date=short --grep='^docs')
+        logs=$(git log origin/main..HEAD --format='- %s by %an on %ci (%h)' --grep='^docs')
         echo "$logs"
         exit 0
