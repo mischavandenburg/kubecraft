@@ -8,13 +8,8 @@ Below is a running list of commits with changes to the project documentation. Gi
 
 ---
 ## 2025-04-01
-- docs: file structure by jazo (c7aadd7)
-## 2025-03-31
-- docs: test d by jazo (f5d090c)
-- docs: changelog.md test by jazo (d82b743)
-- docs: test c by jazo (6ee0db2)
-- docs: test b by jazo (6ee33bb)
-- docs: test a by jazo (15c74bf)
+- docs: GHA docs bot now live on main by jazo (17235e3)
+- docs: added to authors and people by jazo (5f95010)
 ## 2025-02-13
 - Merge pull request #49 from jamiebarrow/docs/add-github-and-linkedin by Mischa (9d08629)
 ## 2025-02-12
