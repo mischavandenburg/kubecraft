@@ -17,6 +17,8 @@ We are incredibly proud of our dedicated community members who contribute their 
 
 [James Barrow](https://jamiebarrow.dev/) [:simple-github:](https://github.com/jamiebarrow) [:fontawesome-brands-linkedin:](https://www.linkedin.com/in/jamesbarrow1984)
 
+[James Lazo (jazo)](https://www.jameslazo.com/) [:simple-github:](https://github.com/jameslazo) [:fontawesome-brands-linkedin:](https://www.linkedin.com/in/jameslazo)
+
 [Jan Charamza](https://charamza.substack.com/)
 
 [Jayanath Amaranayake](https://fewmorewords.com) [:simple-github:](https://github.com/jayanath) [:fontawesome-brands-linkedin:](https://www.linkedin.com/in/jayanath/)

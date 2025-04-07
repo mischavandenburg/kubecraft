@@ -1,0 +1,9 @@
+---
+title: Updates
+hide:
+  - toc
+---
+
+Below is a running list of commits with changes to the project documentation. GitHub Actions repopulates this list on every commit to `main`. All documentation-related commits should start with `docs` to be included in the updates.
+
+---

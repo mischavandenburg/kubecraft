@@ -1,0 +1,57 @@
+name: GHA Docs
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update-changelog:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Get docs commits
+      id: docs_commits
+      env:
+        SCRIPT: '.github/workflows/docs/gha.sh'
+        TMP_FP: '/tmp/Changelog.md'
+        FP: 'docs/Updates/Changelog.md'
+      run: |
+        ./$SCRIPT
+        if [ -z $FP ]; then
+          touch $FP
+        fi
+        if ! diff $TMP_FP $FP &>/dev/null; then
+          mv $TMP_FP $FP
+          echo "NEW_CL=true" >> $GITHUB_ENV
+        fi
+    
+    - name: New branch
+      id: create_branch
+      if: env.NEW_CL == 'true'
+      env:
+        FP: 'docs/Updates/Changelog.md'
+      run: |
+        BRANCH_NAME="docs-changelog-$(date +'%Y%m%d-%H%M%S')"
+        git checkout -b $BRANCH_NAME
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions@github.com"
+        git add $FP
+        git commit -m "chore: Update docs Changelog.md"
+        git push origin $BRANCH_NAME
+        echo "BN=$BRANCH_NAME" >> $GITHUB_ENV
+    
+    - name: Create Pull Request
+      if: env.NEW_CL == 'true'
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        gh pr create --title "Update Changelog" \
+          --body "This PR updates the Changelog.md file with the latest documentation changes from $(date +'%Y%m%d-%H%M%S')." \
+          --base main --head ${{ env.BN }} \
+          --label "documentation"
